@@ -1,0 +1,10 @@
+# Extra dependencies for the native desktop app (Kali/Linux, pywebview).
+# Install on top of requirements.txt:
+#     pip install -r requirements.txt -r requirements-desktop.txt
+#
+# On Linux, pywebview also needs system GTK + WebKit2 bindings (apt):
+#     python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1
+# and the venv must be created with --system-site-packages so it can see them.
+
+pywebview>=5.1,<6
+waitress>=3.0,<4

@@ -1,0 +1,6 @@
+# Shell scripts must keep LF endings or the container entrypoint breaks
+# ("bad interpreter") when the repo is checked out on Windows.
+*.sh text eol=lf
+docker-entrypoint.sh text eol=lf
+bin/vulntriage text eol=lf
+bin/vulntriage-app text eol=lf

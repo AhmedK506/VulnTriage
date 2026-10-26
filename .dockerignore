@@ -1,0 +1,30 @@
+# Keep the build context small and reproducible.
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+backend/venv/
+backend/.venv/
+backend/uploads/
+backend/reports_output/
+backend/instance/
+**/*.db
+**/*.sqlite3
+
+# Node (rebuilt fresh in the frontend stage)
+frontend/node_modules/
+frontend/dist/
+
+# Large ML training data — only the trained model is needed in the image.
+ml_data/*
+!ml_data/models
+
+# Local dev / tooling
+.git/
+.gitignore
+.claude/
+*.md
+debug_report.py
+test_*.py
+setup_nvd_data.py

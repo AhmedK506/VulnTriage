@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+  Sample OWASP ZAP (Traditional XML) report for testing the VulnTriage CLI:
+      vulntriage scan samples/zap-sample.xml -s zap
+  The target (testphp.vulnweb.com) is Acunetix's public, intentionally
+  vulnerable test site. Do NOT run live PoC checks unless you are authorised
+  to send live traffic to the target.
+-->
+<OWASPZAPReport version="2.14.0" generated="Mon, 16 Jun 2026 10:00:00">
+  <site name="http://testphp.vulnweb.com" host="testphp.vulnweb.com" port="80" ssl="false">
+    <alerts>
+      <alertitem>
+        <pluginid>40012</pluginid>
+        <alertRef>40012</alertRef>
+        <alert>Cross Site Scripting (Reflected)</alert>
+        <name>Cross Site Scripting (Reflected)</name>
+        <riskcode>3</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>High (Medium)</riskdesc>
+        <desc>Reflected XSS in the search parameter.</desc>
+        <instances>
+          <instance>
+            <uri>http://testphp.vulnweb.com/search.php?test=query</uri>
+            <method>GET</method>
+            <param>test</param>
+            <evidence>&lt;script&gt;alert(1)&lt;/script&gt;</evidence>
+          </instance>
+        </instances>
+        <solution>Encode output and validate input.</solution>
+        <cweid>79</cweid>
+        <wascid>8</wascid>
+      </alertitem>
+      <alertitem>
+        <pluginid>40018</pluginid>
+        <alert>SQL Injection</alert>
+        <name>SQL Injection</name>
+        <riskdesc>High (High)</riskdesc>
+        <desc>SQL injection in the cat parameter.</desc>
+        <instances>
+          <instance>
+            <uri>http://testphp.vulnweb.com/listproducts.php?cat=1</uri>
+            <method>GET</method>
+            <param>cat</param>
+          </instance>
+        </instances>
+        <solution>Use parameterised queries.</solution>
+        <cweid>89</cweid>
+      </alertitem>
+      <alertitem>
+        <pluginid>10020</pluginid>
+        <alert>Missing Anti-clickjacking Header</alert>
+        <name>Missing Anti-clickjacking Header</name>
+        <riskdesc>Medium (Medium)</riskdesc>
+        <desc>X-Frame-Options header is not set.</desc>
+        <instances>
+          <instance>
+            <uri>http://testphp.vulnweb.com/</uri>
+            <method>GET</method>
+          </instance>
+        </instances>
+        <solution>Set the X-Frame-Options or Content-Security-Policy frame-ancestors directive.</solution>
+        <cweid>1021</cweid>
+      </alertitem>
+    </alerts>
+  </site>
+</OWASPZAPReport>

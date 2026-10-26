@@ -1,0 +1,43 @@
+# VulnTriage — full stack in one command:  docker compose up --build
+# Then open http://localhost:5000  (default login: admin / admin)
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-vuln_triage_db}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-vuln_triage_db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      FLASK_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-vuln_triage_db}
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-jwt-in-production}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@vulntriage.local}
+      NVD_API_KEY: ${NVD_API_KEY:-}
+      FRONTEND_DIST: /app/frontend/dist
+    ports:
+      - "${APP_PORT:-5000}:5000"
+    volumes:
+      - uploads:/app/backend/uploads
+      - reports:/app/backend/reports_output
+
+volumes:
+  pgdata:
+  uploads:
+  reports:

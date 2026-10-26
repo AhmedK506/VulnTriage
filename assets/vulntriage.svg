@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b557f"/>
+      <stop offset="1" stop-color="#1e3a5f"/>
+    </linearGradient>
+  </defs>
+  <!-- shield -->
+  <path d="M128 16 L216 48 V128 C216 184 176 224 128 240 C80 224 40 184 40 128 V48 Z"
+        fill="url(#shield)" stroke="#13263d" stroke-width="6"/>
+  <!-- inner panel -->
+  <path d="M128 36 L196 60 V128 C196 174 165 207 128 220 C91 207 60 174 60 128 V60 Z"
+        fill="#0f2238" opacity="0.55"/>
+  <!-- magnifier ring (triage / scanning) -->
+  <circle cx="116" cy="116" r="40" fill="none" stroke="#7aa8d6" stroke-width="10"/>
+  <line x1="146" y1="146" x2="178" y2="178" stroke="#7aa8d6" stroke-width="14" stroke-linecap="round"/>
+  <!-- confirmation check -->
+  <path d="M98 116 l14 16 l28 -34" fill="none" stroke="#22c55e"
+        stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

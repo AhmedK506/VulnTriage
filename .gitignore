@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+.venv/
+env/
+
+# Flask / project
+backend/.env
+backend/uploads/
+backend/reports_output/
+ml_data/models/
+instance/
+
+# Large NVD data feeds (~99 MB; re-downloadable via the fkie-cad mirror /
+# app.ml.cwe_profile_builder). The small derived ml_data/cwe_cvss_profiles.json
+# is kept tracked so CWE→CVSS enrichment works without the raw feeds.
+ml_data/nvd/
+!ml_data/cwe_cvss_profiles.json
+
+# CLI / SQLite runtime databases
+*.db
+*.sqlite3
+vulntriage.db
+
+# Node
+node_modules/
+frontend/dist/
+frontend/build/
+.npm/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/

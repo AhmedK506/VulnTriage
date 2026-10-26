@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Launch the VulnTriage native desktop window (pywebview).
+# Used by the .desktop applications-menu entry.
+set -e
+ROOT="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+
+# This box is a VM with no 3D accel, where WebKitGTK 2.52 paints a blank white
+# page (the DOM is correct — verified via headless Chromium — but its GL
+# compositor never renders, with or without software-GL/DMABUF tweaks). Use the
+# Chromium app-window UI instead, which renders correctly. On real hardware,
+# unset this (or set VULNTRIAGE_UI=webview) to get the native GTK/WebKit window.
+export VULNTRIAGE_UI="${VULNTRIAGE_UI:-browser}"
+
+source "$ROOT/backend/.venv/bin/activate"
+exec python "$ROOT/backend/desktop_app.py"
